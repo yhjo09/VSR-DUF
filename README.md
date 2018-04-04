@@ -1,6 +1,6 @@
 # Deep Video Super-Resolution Network Using Dynamic Upsampling Filters Without Explicit Motion Compensation
 
-This is a tensorflow implementation of the paper. [PDF](./)
+This is a tensorflow implementation of the paper. [PDF]()
 
 ## directory
 `./inputs/G/` Ground-truth video frames  
@@ -31,3 +31,4 @@ For example, `python test.py 16 G` super-resolve input frames in `./inputs/G/*` 
 	year = {2018}
 }
 ```
+
