@@ -1,6 +1,6 @@
 # Deep Video Super-Resolution Network Using Dynamic Upsampling Filters Without Explicit Motion Compensation
 
-This is a tensorflow implementation of the paper. [PDF]()
+This is a tensorflow implementation of the paper. [PDF](http://yhjo09.github.io/files/VSR-DUF_CVPR18.pdf)
 
 ## directory
 `./inputs/G/` Ground-truth video frames  
