@@ -10,14 +10,18 @@ This is a tensorflow implementation of the paper. [PDF](http://yhjo09.github.io/
 `./results/<L>L/L/` Outputs from given low-resolution video frames using <L> depth network
 
 ## test
-Put your video frames to the input directory and run `test.py` with arguments `<L>` and `<T>`.
+Put your video frames to the input directory and run `test.py` with arguments `<R>`, `<L>` and `<T>`.
 ```
-python test.py <L> <T>
+python test.py <R> <L> <T>
 ```
+`<R>` is the upscaling factor of 2, 3, 4.
 `<L>` is the depth of network of 16, 28, 52.
 `<T>` is the type of input frames, `G` denotes GT inputs and `L` denotes LR inputs.
 
-For example, `python test.py 16 G` super-resolve input frames in `./inputs/G/*` using `16` depth network.
+For example, `python test.py 4 16 G` super-resolve input frames in `./inputs/G/*` using `16` depth network with upscaling factor `4`.
+(Possible combinations for `<R> <L>` is `2 16`, `3 16`, `4 16`, `4 28`, and `4 52`.)
+
+This code was tested under Python 2.7 and TensorFlow 1.3.0.
 
 ## video
 [![supplementary video](./supple/title.png)](./supple/VSR_supple_crf28.mp4?raw=true)

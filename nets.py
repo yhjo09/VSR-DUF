@@ -6,7 +6,7 @@ from utils import BatchNorm, Conv3D
 stp = [[0,0], [1,1], [1,1], [1,1], [0,0]]
 sp = [[0,0], [0,0], [1,1], [1,1], [0,0]]
 
-def FR_16L(x, is_train):
+def FR_16L(x, is_train, uf=4):
     x = Conv3D(tf.pad(x, sp, mode='CONSTANT'), [1,3,3,3,64], [1,1,1,1,1], 'VALID', name='conv1') 
 
     F = 64
@@ -41,19 +41,19 @@ def FR_16L(x, is_train):
     
     r = Conv3D(x, [1,1,1,256,256], [1,1,1,1,1], 'VALID', name='rconv1')
     r = tf.nn.relu(r)
-    r = Conv3D(r, [1,1,1,256,3*16], [1,1,1,1,1], 'VALID', name='rconv2')  
+    r = Conv3D(r, [1,1,1,256,3*uf*uf], [1,1,1,1,1], 'VALID', name='rconv2')  
     
     f = Conv3D(x, [1,1,1,256,512], [1,1,1,1,1], 'VALID', name='fconv1') 
     f = tf.nn.relu(f)
-    f = Conv3D(f, [1,1,1,512,1*5*5*16], [1,1,1,1,1], 'VALID', name='fconv2')    
+    f = Conv3D(f, [1,1,1,512,1*5*5*uf*uf], [1,1,1,1,1], 'VALID', name='fconv2')    
     
     ds_f = tf.shape(f)
-    f = tf.reshape(f, [ds_f[0], ds_f[1], ds_f[2], ds_f[3], 25, 16])
+    f = tf.reshape(f, [ds_f[0], ds_f[1], ds_f[2], ds_f[3], 25, uf*uf])
     f = tf.nn.softmax(f, dim=4)
 
     return f, r
 
-def FR_28L(x, is_train):
+def FR_28L(x, is_train, uf=4):
     x = Conv3D(tf.pad(x, sp, mode='CONSTANT'), [1,3,3,3,64], [1,1,1,1,1], 'VALID', name='conv1')
 
     F = 64
@@ -89,19 +89,19 @@ def FR_28L(x, is_train):
     
     r = Conv3D(x, [1,1,1,256,256], [1,1,1,1,1], 'VALID', name='rconv1')
     r = tf.nn.relu(r)
-    r = Conv3D(r, [1,1,1,256,3*16], [1,1,1,1,1], 'VALID', name='rconv2')  
+    r = Conv3D(r, [1,1,1,256,3*uf*uf], [1,1,1,1,1], 'VALID', name='rconv2')  
     
     f = Conv3D(x, [1,1,1,256,512], [1,1,1,1,1], 'VALID', name='fconv1')
     f = tf.nn.relu(f)
-    f = Conv3D(f, [1,1,1,512,1*5*5*16], [1,1,1,1,1], 'VALID', name='fconv2')    
+    f = Conv3D(f, [1,1,1,512,1*5*5*uf*uf], [1,1,1,1,1], 'VALID', name='fconv2')    
     
     ds_f = tf.shape(f)
-    f = tf.reshape(f, [ds_f[0], ds_f[1], ds_f[2], ds_f[3], 25, 16])
+    f = tf.reshape(f, [ds_f[0], ds_f[1], ds_f[2], ds_f[3], 25, uf*uf])
     f = tf.nn.softmax(f, dim=4)
 
     return f, r
 
-def FR_52L(x, is_train):
+def FR_52L(x, is_train, uf=4):
     x = Conv3D(tf.pad(x, sp, mode='CONSTANT'), [1,3,3,3,64], [1,1,1,1,1], 'VALID', name='conv1')
 
     F = 64
@@ -137,14 +137,14 @@ def FR_52L(x, is_train):
     
     r = Conv3D(x, [1,1,1,256,256], [1,1,1,1,1], 'VALID', name='rconv1')
     r = tf.nn.relu(r)
-    r = Conv3D(r, [1,1,1,256,3*16], [1,1,1,1,1], 'VALID', name='rconv2')  
+    r = Conv3D(r, [1,1,1,256,3*uf*uf], [1,1,1,1,1], 'VALID', name='rconv2')  
     
     f = Conv3D(x, [1,1,1,256,512], [1,1,1,1,1], 'VALID', name='fconv1')
     f = tf.nn.relu(f)
-    f = Conv3D(f, [1,1,1,512,1*5*5*16], [1,1,1,1,1], 'VALID', name='fconv2')    
+    f = Conv3D(f, [1,1,1,512,1*5*5*uf*uf], [1,1,1,1,1], 'VALID', name='fconv2')    
     
     ds_f = tf.shape(f)
-    f = tf.reshape(f, [ds_f[0], ds_f[1], ds_f[2], ds_f[3], 25, 16])
+    f = tf.reshape(f, [ds_f[0], ds_f[1], ds_f[2], ds_f[3], 25, uf*uf])
     f = tf.nn.softmax(f, dim=4)
 
     return f, r
